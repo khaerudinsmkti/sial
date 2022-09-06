@@ -40,7 +40,7 @@ class HomeController extends Controller
                  ->select('asal', DB::raw('count(*) as total'))
                  ->groupBy('asal')
                  ->get();
-        //dd($user_info);
+        //dd($pengirimsurat);
 
 
 

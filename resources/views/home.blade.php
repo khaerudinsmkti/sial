@@ -109,7 +109,12 @@
                 @foreach ($pengirimsurat as $item)
                     <h4 class="small font-weight-bold">{{ $item->asal }} <span class="float-right">{{ $item->total }}</span></h4>
                     <div class="progress mb-4">
+                        @if ( $item->asal  === "Diskominfo")
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        @else
                         <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+
+                        @endif
                     </div>
                 @endforeach
                 </div>
