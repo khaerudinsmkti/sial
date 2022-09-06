@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Surat;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,13 +29,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::count();
+        $surat = Surat::count();
+        $suratmasuk = Surat::where('status',0)->count();
+        $suratkeluar = Surat::where('status',1)->count();
+        $suratkeluar = Surat::where('status',1)->count();
+        $suratbulanini = Surat::whereMonth('tanggal', Carbon::now()->month)->count();
+        //$pengirimsurat = Surat::get()->groupBy('asal');
 
-        $widget = [
-            'users' => $users,
-            //...
-        ];
+        $pengirimsurat = DB::table('surats')
+                 ->select('asal', DB::raw('count(*) as total'))
+                 ->groupBy('asal')
+                 ->get();
+        //dd($user_info);
 
-        return view('home', compact('widget'));
+
+
+        return view('home', compact('surat','suratmasuk','suratkeluar','suratbulanini','pengirimsurat'));
     }
 }

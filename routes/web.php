@@ -14,16 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/surat', 'SuratController');
+Route::get('/suratkeluar', 'SuratController@suratkeluar')->name('surat-keluar');
+Route::get('/input-surat', 'SuratController@create')->name('input-surat');
 
-Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::put('/profile', 'ProfileController@update')->name('profile.update');
+//Route::get('/profile', 'ProfileController@index')->name('profile');
+//Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+// Route::get('/about', function () {
+//     return view('about');
+// })->name('about');
